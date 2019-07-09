@@ -4,15 +4,24 @@ require 'selenium-webdriver'
 driver = Selenium::WebDriver.for :chrome
 wait = Selenium::WebDriver::Wait.new(:timeout => 10) # seconds
 
-driver.get "https://the-internet.herokuapp.com/"
+LINK = "https://the-internet.herokuapp.com/"
+DYN = "Dynamic Loading"
+EX1 = "Example 1"
+EX2 = "Example 2"
+BTN = "button"
+FIN = "#finish h4"
 
-element = driver.find_element(:link_text, "Dynamic Loading").click
 
-element = driver.find_element(:partial_link_text, "Example 1").click
 
-element = driver.find_element(:tag_name, "button").click
+driver.get LINK
 
-element = driver.find_element(:css, "#finish h4")
+element = driver.find_element(:link_text, DYN).click
+
+element = driver.find_element(:partial_link_text, EX1).click
+
+element = driver.find_element(:tag_name, BTN).click
+
+element = driver.find_element(:css, FIN)
 
 wait.until { element.displayed? }
 
@@ -22,12 +31,12 @@ puts element.text
 
 driver.navigate.back
 
-element = driver.find_element(:partial_link_text, "Example 2").click
+element = driver.find_element(:partial_link_text, EX2).click
 
- driver.find_element(:tag_name, "button").click 
+ driver.find_element(:tag_name, BTN).click 
 
 begin
-element = wait.until { driver.find_element(:css => "#finish h4") }
+element = wait.until { driver.find_element(:css => FIN) }
 end
 #wait.until { element.displayed? }
 

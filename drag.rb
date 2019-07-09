@@ -3,13 +3,18 @@ require 'selenium-webdriver'
 
 driver = Selenium::WebDriver.for :chrome
 
-driver.get "https://the-internet.herokuapp.com/"
+LINK = "https://the-internet.herokuapp.com/"
+DRAG = "Drag and Drop"
+COLA = "column-a"
+COLB = "column-b"
 
-element = driver.find_element(:link_text, "Drag and Drop").click
+driver.get LINK
 
-element = driver.find_element(:id, "column-a")
+element = driver.find_element(:link_text, DRAG).click
 
-e = driver.find_element(:id, "column-b")
+element = driver.find_element(:id, COLA)
+
+e = driver.find_element(:id, COLB)
 
 driver.action.drag_and_drop(element, e).perform
 sleep(5)

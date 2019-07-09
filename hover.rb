@@ -2,14 +2,18 @@ require 'rubygems'
 require 'selenium-webdriver'
 
 driver = Selenium::WebDriver.for :chrome
-driver.get "https://the-internet.herokuapp.com/"
+LINK = "https://the-internet.herokuapp.com/"
+HOVER = "Hovers"
+FIG = 'figure'
+
+driver.get LINK
 
 
-driver.find_element(:link_text, "Hovers").click
+driver.find_element(:link_text, HOVER).click
 wait = Selenium::WebDriver::Wait.new(:timeout => 20) # seconds
 
 begin
-elements = driver.find_elements(:class,'figure')
+elements = driver.find_elements(:class, 'figure')
 end
 
 elements.each { |e| 
@@ -18,5 +22,5 @@ puts e.text
 
 }
 
-sleep(5)
+sleep(4)
 driver.quit
